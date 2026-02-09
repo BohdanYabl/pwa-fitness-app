@@ -1,0 +1,223 @@
+/* === PROGRESS PAGE === */
+.page-progress .header h1 {
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+  min-width: 0;
+}
+
+.page-progress .header .header-logo .icon {
+  color: white;
+}
+
+/* === CAMERA MODAL === */
+.camera-modal-content {
+  max-width: 100%;
+  margin: var(--spacing-md);
+}
+.camera-preview-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  max-height: 60vh;
+  background: #000;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+}
+.camera-preview-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.camera-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+.camera-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* === ADD PROGRESS FORM === */
+.add-progress-section {
+  background: var(--bg-primary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  margin-bottom: var(--spacing-lg);
+}
+
+.add-progress-section h2 {
+  font-size: 1rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.photo-source-buttons {
+  margin-bottom: var(--spacing-xs);
+}
+
+.photo-source-btn {
+  flex: 1;
+  min-width: 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.photo-edit-preview {
+  margin-bottom: var(--spacing-md);
+}
+
+.photo-edit-preview img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.photo-card-clickable {
+  cursor: pointer;
+}
+
+.photo-card-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.photo-preview-wrap {
+  margin: var(--spacing-md) 0;
+}
+
+.photo-preview-wrap img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.photo-preview-wrap .btn {
+  margin-top: var(--spacing-sm);
+}
+
+/* === PROGRESS ENTRIES (photo grid) === */
+.progress-entries-section {
+  margin-top: var(--spacing-xl);
+}
+
+.progress-entries-section h2 {
+  margin-bottom: var(--spacing-lg);
+  font-size: 1rem;
+}
+
+.progress-entries-section h2 .icon {
+  color: var(--gradient-start);
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.photo-card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.photo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.photo-card-image-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.photo-card-image-wrap img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.photo-card-delete {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.photo-card-delete:hover {
+  background: var(--danger);
+  color: white;
+}
+
+.photo-card-delete .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.photo-card-info {
+  padding: var(--spacing-md);
+}
+
+.photo-weight {
+  font-weight: 700;
+  color: var(--gradient-start);
+  font-size: 0.9375rem;
+  margin-bottom: 0.25rem;
+}
+
+.photo-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .modal-content {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-sm);
+  }
+}

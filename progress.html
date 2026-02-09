@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8b5cf6">
+  <meta name="description" content="Progress photos – body progress tracking">
+  <title>Progress Photos – Fitness Tracker</title>
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/progress.css">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./images/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" href="./images/icons/icon-192x192.png">
+</head>
+<body class="page-progress">
+  <div id="offlineBanner" class="offline-banner" aria-live="polite" style="display:none">No connection. App works offline.</div>
+  <header class="header header-compact">
+    <a href="./index.html" class="back-btn">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+    <h1>
+      <span class="header-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </span>
+      Progress Photos
+    </h1>
+  </header>
+
+  <main class="container">
+    <section class="add-progress-section">
+      <h2>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        Add progress entry
+      </h2>
+      <form id="progressForm">
+        <div class="form-group">
+          <label>Photo</label>
+          <div class="photo-source-buttons">
+            <button type="button" id="takePhotoBtn" class="btn btn-secondary btn-sm photo-source-btn">
+              <span class="btn-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
+              Take photo
+            </button>
+            <button type="button" id="chooseGalleryBtn" class="btn btn-secondary btn-sm photo-source-btn">
+              <span class="btn-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+              Choose from gallery
+            </button>
+            <input type="file" id="photoInputGallery" accept="image/*" class="sr-only">
+          </div>
+        </div>
+        <div id="photoPreviewWrap" class="photo-preview-wrap" style="display: none;">
+          <img id="photoPreview" alt="Preview" />
+          <button type="button" id="clearPhotoBtn" class="btn btn-secondary btn-sm">Remove photo</button>
+        </div>
+        <div class="form-group">
+          <label for="progressDate">Date</label>
+          <input type="date" id="progressDate" class="text-input" required>
+        </div>
+        <div class="form-group">
+          <label for="progressWeight">Weight (kg)</label>
+          <input type="number" id="progressWeight" class="text-input" step="0.1" placeholder="70.5" required>
+        </div>
+        <div class="form-group">
+          <label for="progressNotes">Notes (optional)</label>
+          <textarea id="progressNotes" class="textarea-input" rows="2" placeholder="How you feel..."></textarea>
+        </div>
+        <button type="submit" id="saveProgressBtn" class="btn btn-primary btn-large" disabled>
+          <span class="btn-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg></span>
+          Save entry
+        </button>
+      </form>
+    </section>
+
+    <section class="progress-entries-section">
+      <h2>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+        All entries
+      </h2>
+      <div id="photoGrid" class="photo-grid">
+        <p class="empty">No photos yet. Add your first entry!</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="cameraModal" class="modal">
+    <div class="modal-content camera-modal-content">
+      <span class="modal-close" id="closeCameraModal" aria-label="Close">&times;</span>
+      <h2>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Take photo
+      </h2>
+      <div class="camera-preview-wrap">
+        <video id="cameraVideo" autoplay playsinline muted></video>
+        <div id="cameraError" class="camera-error" style="display:none">
+          <p>Camera not available. Use "Choose from gallery" instead.</p>
+        </div>
+      </div>
+      <div class="camera-actions">
+        <button type="button" id="capturePhotoBtn" class="btn btn-primary btn-large">
+          <span class="btn-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" fill="currentColor"/></svg></span>
+          Capture
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="photoDetailModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" id="closePhotoModal" aria-label="Close">&times;</span>
+      <h2>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M21 15l-5-5L5 21"/></svg>
+        <span id="photoModalTitle">Edit entry</span>
+      </h2>
+      <form id="photoEditForm">
+        <input type="hidden" id="photoEditId" value="">
+        <div class="form-group">
+          <label>Photo</label>
+          <div id="photoEditPreview" class="photo-edit-preview"></div>
+          <div class="photo-source-buttons">
+            <button type="button" id="takePhotoEditBtn" class="btn btn-secondary btn-sm photo-source-btn">Take photo</button>
+            <button type="button" id="chooseGalleryEditBtn" class="btn btn-secondary btn-sm photo-source-btn">Choose from gallery</button>
+            <input type="file" id="photoEditInputGallery" accept="image/*" class="sr-only">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="photoEditDate">Date</label>
+          <input type="date" id="photoEditDate" class="text-input" required>
+        </div>
+        <div class="form-group">
+          <label for="photoEditWeight">Weight (kg)</label>
+          <input type="number" id="photoEditWeight" class="text-input" step="0.1" required>
+        </div>
+        <div class="form-group">
+          <label for="photoEditNotes">Notes (optional)</label>
+          <textarea id="photoEditNotes" class="textarea-input" rows="2"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-large">Save changes</button>
+      </form>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="./index.html" class="nav-item"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span><span class="nav-label">Home</span></a>
+    <a href="./progress.html" class="nav-item active"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="nav-label">Progress</span></a>
+    <a href="./profile.html" class="nav-item"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="nav-label">Profile</span></a>
+  </nav>
+
+  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/progress.js"></script>
+</body>
+</html>
