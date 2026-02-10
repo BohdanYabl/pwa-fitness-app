@@ -56,7 +56,7 @@ form?.addEventListener("submit", async (e) => {
 function initDatePicker() {
   if (typeof window.flatpickr === "undefined") return;
   const el = document.getElementById("profileBirthDate");
-  if (el && !el._flatpickr) window.flatpickr(el, { locale: "en", dateFormat: "Y-m-d", allowInput: true });
+  if (el && !el._flatpickr) window.flatpickr(el, { dateFormat: "Y-m-d", allowInput: true });
 }
 
 async function init() {

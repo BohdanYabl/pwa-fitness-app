@@ -312,7 +312,7 @@ photoDetailModal?.addEventListener("click", (e) => {
 
 function initDatePickers() {
   if (typeof window.flatpickr === "undefined") return;
-  const opts = { locale: "en", dateFormat: "Y-m-d", allowInput: true };
+  const opts = { dateFormat: "Y-m-d", allowInput: true };
   const p = document.getElementById("progressDate");
   const e = document.getElementById("photoEditDate");
   if (p && !p._flatpickr) window.flatpickr(p, opts);

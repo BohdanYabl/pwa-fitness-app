@@ -519,7 +519,7 @@ getLocationEditBtn?.addEventListener("click", requestLocationEdit);
 
 function initDatePickers() {
   if (typeof window.flatpickr === "undefined") return;
-  const opts = { locale: "en", dateFormat: "Y-m-d", allowInput: true };
+  const opts = { dateFormat: "Y-m-d", allowInput: true };
   const w = document.getElementById("workoutDate");
   const e = document.getElementById("workoutEditDate");
   if (w && !w._flatpickr) window.flatpickr(w, opts);
