@@ -26,7 +26,19 @@ export function toDateInputValue(timestamp) {
 }
 
 export function getActivityIcon(type) {
-  const map = { running: "🏃", cycling: "🚴", walking: "🚶", swimming: "🏊" };
+  const map = {
+    running: "🏃",
+    cycling: "🚴",
+    walking: "🚶",
+    swimming: "🏊",
+    gym: "🏋️",
+    yoga: "🧘",
+    hiking: "🥾",
+    skating: "⛸️",
+    rowing: "🚣",
+    boxing: "🥊",
+    dancing: "💃",
+  };
   return map[type] || "🏃";
 }
 
@@ -36,6 +48,13 @@ export function getActivityName(type) {
     cycling: "Cycling",
     walking: "Walking",
     swimming: "Swimming",
+    gym: "Gym",
+    yoga: "Yoga",
+    hiking: "Hiking",
+    skating: "Skating",
+    rowing: "Rowing",
+    boxing: "Boxing",
+    dancing: "Dancing",
   };
   return map[type] || "Workout";
 }

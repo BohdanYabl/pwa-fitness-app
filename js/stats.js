@@ -38,13 +38,14 @@ export async function getPeriodStats(period = "week") {
     const { start, end } = getPeriodBounds(period);
 
     const filtered = (workouts || []).filter((w) => {
-      const d = w?.date ?? 0;
+      const d = Number(w?.date) || 0;
+      if (!d) return false;
       return d >= start && d <= end;
     });
     let totalMinutes = 0;
     filtered.forEach((w) => {
-      const dur = w?.duration ?? 0;
-      totalMinutes += typeof dur === "number" ? Math.floor(dur / 60) : dur;
+      const dur = Number(w?.duration) || 0;
+      totalMinutes += Math.floor(dur / 60);
     });
 
     return {

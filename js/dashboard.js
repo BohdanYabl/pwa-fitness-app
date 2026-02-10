@@ -26,6 +26,13 @@ let currentPeriod = "week";
 let currentLocation = null;
 let editingWorkoutId = null;
 
+/** "YYYY-MM-DD" → timestamp of that day at local midnight (for correct week/month/year stats) */
+function dateStringToLocalTimestamp(dateStr) {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const date = new Date(y, m - 1, d, 0, 0, 0, 0);
+  return date.getTime();
+}
+
 const formSection = document.getElementById("workoutFormSection");
 const formTitle = document.getElementById("workoutFormTitle");
 const workoutIdInput = document.getElementById("workoutId");
@@ -264,8 +271,8 @@ function updateLocationEditStatus(lat, lng) {
 // Map picker (Leaflet) – choose location by tapping on map
 let mapPickerInstance = null;
 let mapPickerMarker = null;
-const DEFAULT_CENTER = [50.45, 30.52];
-const DEFAULT_ZOOM = 10;
+const DEFAULT_CENTER = [52.23, 21.01];
+const DEFAULT_ZOOM = 6;
 
 function closeMapPicker() {
   if (mapPickerInstance) {
@@ -421,7 +428,7 @@ async function submitWorkout(e) {
     return;
   }
 
-  const date = new Date(dateStr).getTime();
+  const date = dateStringToLocalTimestamp(dateStr);
   const workout = {
     type,
     date,
@@ -462,7 +469,7 @@ async function submitWorkoutEdit(e) {
     return;
   }
 
-  const date = new Date(dateStr).getTime();
+  const date = dateStringToLocalTimestamp(dateStr);
   const workout = {
     type,
     date,
@@ -510,11 +517,21 @@ workoutModal?.addEventListener("click", (e) => {
 workoutEditForm?.addEventListener("submit", submitWorkoutEdit);
 getLocationEditBtn?.addEventListener("click", requestLocationEdit);
 
+function initDatePickers() {
+  if (typeof window.flatpickr === "undefined") return;
+  const opts = { locale: "en", dateFormat: "Y-m-d", allowInput: true };
+  const w = document.getElementById("workoutDate");
+  const e = document.getElementById("workoutEditDate");
+  if (w && !w._flatpickr) window.flatpickr(w, opts);
+  if (e && !e._flatpickr) window.flatpickr(e, opts);
+}
+
 async function init() {
   try {
     await initDB();
     await updateProgressStats();
     await displayWorkouts();
+    initDatePickers();
   } catch (error) {
     console.error("[dashboard] init", error);
   }

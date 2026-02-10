@@ -11,6 +11,7 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./images/icons/icon-192x192.png">
   <link rel="apple-touch-icon" href="./images/icons/icon-192x192.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body class="page-profile">
   <div id="offlineBanner" class="offline-banner" aria-live="polite" style="display:none">No connection. App works offline.</div>
@@ -33,7 +34,7 @@
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Edit profile
       </h2>
-      <form id="profileForm">
+      <form id="profileForm" lang="en">
         <div class="form-group">
           <label for="profileName">Name / nick</label>
           <input type="text" id="profileName" class="text-input" placeholder="e.g. John">
@@ -43,8 +44,45 @@
           <input type="number" id="profileHeight" class="text-input" min="100" max="250" step="1" placeholder="175">
         </div>
         <div class="form-group">
+          <label for="profileCurrentWeight">Current weight (kg)</label>
+          <input type="number" id="profileCurrentWeight" class="text-input" min="30" step="0.1" placeholder="75">
+        </div>
+        <div class="form-group">
           <label for="profileGoalWeight">Goal weight (kg)</label>
           <input type="number" id="profileGoalWeight" class="text-input" min="30" step="0.1" placeholder="70">
+        </div>
+        <div class="form-group">
+          <label for="profileBirthDate">Date of birth</label>
+          <input type="date" id="profileBirthDate" class="text-input">
+        </div>
+        <div class="form-group">
+          <label for="profileGender">Gender</label>
+          <select id="profileGender" class="select-input">
+            <option value="">—</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="profileGoalMinutes">Goal: minutes per week</label>
+          <input type="number" id="profileGoalMinutes" class="text-input" min="0" step="15" placeholder="150">
+        </div>
+        <div class="form-group">
+          <label for="profileFavoriteActivity">Favorite activity</label>
+          <select id="profileFavoriteActivity" class="select-input">
+            <option value="">—</option>
+            <option value="running">Running</option>
+            <option value="cycling">Cycling</option>
+            <option value="walking">Walking</option>
+            <option value="swimming">Swimming</option>
+            <option value="gym">Gym</option>
+            <option value="yoga">Yoga</option>
+            <option value="hiking">Hiking</option>
+            <option value="skating">Skating</option>
+            <option value="rowing">Rowing</option>
+            <option value="boxing">Boxing</option>
+            <option value="dancing">Dancing</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-primary btn-large">
           <span class="btn-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg></span>
@@ -60,6 +98,8 @@
     <a href="./profile.html" class="nav-item active"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="nav-label">Profile</span></a>
   </nav>
 
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/en.js"></script>
   <script type="module" src="./js/app.js"></script>
   <script type="module" src="./js/profile.js"></script>
 </body>
