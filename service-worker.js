@@ -4,7 +4,7 @@
  * Static: Cache First
  */
 
-const CACHE_VERSION = "v13";
+const CACHE_VERSION = "v14";
 const CACHE_NAME = `fitness-tracker-${CACHE_VERSION}`;
 const OFFLINE_FALLBACK_URL = "./index.html";
 

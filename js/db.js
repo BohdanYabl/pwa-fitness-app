@@ -3,7 +3,7 @@
  */
 
 const DB_NAME = "FitnessTrackerDB";
-const DB_VERSION = 2; // v2: dodano store "profile"
+const DB_VERSION = 2; // v2: added profile store
 
 let db = null;
 

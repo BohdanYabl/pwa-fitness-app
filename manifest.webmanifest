@@ -1,7 +1,7 @@
 {
   "name": "Fitness Tracker",
   "short_name": "FitTracker",
-  "description": "Śledź treningi offline – PWA z geolokalizacją i zdjęciami progresu",
+  "description": "Track workouts offline – PWA with geolocation and progress photos",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
